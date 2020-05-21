@@ -1,29 +1,9 @@
 import React from "react";
 import Circle from "./components/Circle/index";
+import Title from "./components/Title/index";
 import list from "./data/list.json";
 import cls from "classnames";
-const title = [
-  {
-    color: "#0b1641",
-    text: "C",
-  },
-  {
-    color: "#c13261",
-    text: "O",
-  },
-  {
-    color: "#dbdbdb",
-    text: "L",
-  },
-  {
-    color: "#d7b799",
-    text: "O",
-  },
-  {
-    color: "#8c416a",
-    text: "R",
-  },
-];
+
 export default class extends React.Component {
   state = {
     currentColor: "red",
@@ -46,11 +26,7 @@ export default class extends React.Component {
         <div className="wrapper">
           <div className="left">{this.renderList()}</div>
           <div className="right">
-            <div className="title">
-              {title.map(({ color, text }) => {
-                return <span style={{ color }}>{text}</span>;
-              })}
-            </div>
+            <Title />
             <div className="color-card">
               {list.map(({ set, list }) => {
                 return (
