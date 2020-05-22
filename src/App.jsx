@@ -14,7 +14,7 @@ export default class extends React.Component {
   renderList() {
     const { currentList } = this.state;
     return currentList.map(({ name, value }, index) => {
-      return <Circle key={name} color={value} index={index} />;
+      return <Circle key={name} name={name} color={value} index={index} />;
     });
   }
 

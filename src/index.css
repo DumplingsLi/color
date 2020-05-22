@@ -12,7 +12,9 @@ body,
   -moz-osx-font-smoothing: grayscale;
   --dis: 50px;
 }
-
+* {
+  box-sizing: border-box;
+}
 h1,
 h2 {
   margin: 0;
@@ -69,11 +71,15 @@ h2 {
   text-align: center;
 }
 .title svg {
-  width: 100px;
-  height: 120px;
+  margin-right: 20px;
+  width: 70px;
+  height: 70px;
   line-height: 120px;
   cursor: pointer;
   transition: all 0.3s ease;
+}
+.title svg:last-child {
+  margin-right: 0;
 }
 .title svg:hover {
   transform: rotateY(180deg);
