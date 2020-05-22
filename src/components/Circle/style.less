@@ -1,42 +1,56 @@
-.circle {
-  width: 68px;
-  height: 68px;
-  display: flex !important;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+.grid-item {
+  width: 100%;
+  height: 100%;
   display: none;
   position: relative;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-.circle svg {
+.circle {
   width: 40px;
   height: 40px;
-  transition: all 0.3s ease-in-out;
-  animation: enter 0.5s ease-in-out;
-}
-
-.circle svg:hover {
-  transform: scale(1.2);
-}
-.circle svg:active {
-  transition: transform 0.1s ease-in-out;
-  transform: scale(0.6);
-}
-.circle .desc {
-  display: none;
-  width: 66px;
-  height: 40px;
-  padding: 4px;
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  font-size: 12px;
-  line-height: 16px;
-  text-align: center;
-  border-radius: 2px;
+  cursor: pointer;
   position: absolute;
-  z-index: 4;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  svg {
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s ease-in-out;
+    animation: enter 0.5s ease-in-out;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+
+    &:active {
+      transition: transform 0.1s ease-in-out;
+      transform: scale(0.6);
+    }
+  }
+
+  .desc {
+    display: none;
+    width: 66px;
+    height: 40px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 4;
+
+    &.copy {
+      width: 58px;
+      height: 24px;
+    }
+  }
 }
 
 @keyframes enter {

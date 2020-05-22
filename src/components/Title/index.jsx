@@ -1,4 +1,5 @@
 import React from "react";
+import "./style.less";
 const textColor = {
   c: "#ffb93f",
   o: "#ac568a",

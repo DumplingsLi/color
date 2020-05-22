@@ -1,7 +1,7 @@
 import React from "react";
 import cls from "classnames";
 import Clipboard from "clipboard";
-import "./style.css";
+import "./style.less";
 
 export default class Circle extends React.Component {
   state = {
@@ -24,8 +24,8 @@ export default class Circle extends React.Component {
     const { left, top } = this.dom.getBoundingClientRect();
     this.setState({
       descStyle: {
-        left: Math.floor(e.pageX - left) + 8,
-        top: Math.floor(e.pageY - top) + 14,
+        left: Math.floor(e.pageX - left) + 12,
+        top: Math.floor(e.pageY - top) + 20,
         display: "block",
       },
     });
@@ -43,31 +43,29 @@ export default class Circle extends React.Component {
       copy: true,
     });
   };
-  // onMouseUp = () => {
-  //   this.setState({
-  //     copy: false,
-  //   });
-  // };
   getDOM = (el) => (this.dom = el);
   render() {
-    const { color, name, index } = this.props;
+    const { color, name, index, onClick } = this.props;
     const { show, descStyle, copy } = this.state;
     return (
       <div
         ref={this.getDOM}
-        className="circle"
+        className="grid-item"
         style={show ? { display: "block" } : null}
         onMouseMove={this.onMouseMove}
         onMouseLeave={this.onMouseLeave}
         onMouseDown={this.onMouseDown}
         onMouseUp={this.onMouseUp}
+        onClick={onClick}
         data-clipboard-text={color}
       >
-        <svg>
-          <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
-        </svg>
-        <div className="desc" style={descStyle}>
-          {copy ? "已复制" : `${name}${color}`}
+        <div className="circle">
+          <svg>
+            <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
+          </svg>
+          <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
+            {copy ? "已复制" : `${name}${color}`}
+          </div>
         </div>
       </div>
     );
