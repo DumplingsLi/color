@@ -3,6 +3,26 @@
   height: 100%;
   display: none;
   position: relative;
+
+  .desc {
+    display: none;
+    width: 66px;
+    height: 40px;
+    padding: 4px;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    border-radius: 2px;
+    position: absolute;
+    z-index: 999;
+
+    &.copy {
+      width: 58px;
+      height: 24px;
+    }
+  }
 }
 
 .circle {
@@ -19,8 +39,8 @@
   svg {
     width: 100%;
     height: 100%;
-    transition: all 0.3s ease-in-out;
-    animation: enter 0.5s ease-in-out;
+    transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+    animation: enter 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 
     &:hover {
       transform: scale(1.2);
@@ -29,26 +49,6 @@
     &:active {
       transition: transform 0.1s ease-in-out;
       transform: scale(0.6);
-    }
-  }
-
-  .desc {
-    display: none;
-    width: 66px;
-    height: 40px;
-    padding: 4px;
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    font-size: 12px;
-    line-height: 16px;
-    text-align: center;
-    border-radius: 2px;
-    position: absolute;
-    z-index: 4;
-
-    &.copy {
-      width: 58px;
-      height: 24px;
     }
   }
 }

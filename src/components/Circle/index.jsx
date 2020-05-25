@@ -9,23 +9,21 @@ export default class Circle extends React.Component {
     descStyle: {},
     copy: false,
   };
-  componentWillMount() {
-    const { color, index } = this.props;
+  componentDidMount() {
+    const { index } = this.props;
     setTimeout(() => {
       this.setState({
         show: true,
       });
     }, index * 8);
-  }
-  componentDidMount() {
     new Clipboard(this.dom);
   }
   onMouseMove = (e) => {
     const { left, top } = this.dom.getBoundingClientRect();
     this.setState({
       descStyle: {
-        left: Math.floor(e.pageX - left) + 12,
-        top: Math.floor(e.pageY - top) + 20,
+        left: Math.floor(e.pageX - left) + 12, //12
+        top: Math.floor(e.pageY - top) + 20, //20
         display: "block",
       },
     });
@@ -43,9 +41,24 @@ export default class Circle extends React.Component {
       copy: true,
     });
   };
+  renderDesc() {
+    const { name, color } = this.props;
+    const { copy } = this.state;
+    if (copy) {
+      return <span>已复制</span>;
+    } else {
+      return (
+        <React.Fragment>
+          <span>{name}</span>
+          <br />
+          <span>{color}</span>
+        </React.Fragment>
+      );
+    }
+  }
   getDOM = (el) => (this.dom = el);
   render() {
-    const { color, name, index, onClick } = this.props;
+    const { color, onClick } = this.props;
     const { show, descStyle, copy } = this.state;
     return (
       <div
@@ -63,9 +76,9 @@ export default class Circle extends React.Component {
           <svg>
             <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
           </svg>
-          <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
-            {copy ? "已复制" : `${name}${color}`}
-          </div>
+        </div>
+        <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
+          {this.renderDesc()}
         </div>
       </div>
     );

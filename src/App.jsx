@@ -17,7 +17,15 @@ export default class extends React.Component {
       currentColor: "red",
       currentList: data[0].list,
       switchColor,
+      showAnimate: true,
     };
+  }
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({
+        showAnimate: false,
+      });
+    }, 1000);
   }
 
   renderList() {
@@ -43,7 +51,7 @@ export default class extends React.Component {
   }
 
   render() {
-    const { currentColor, switchColor } = this.state;
+    const { currentColor, switchColor, showAnimate } = this.state;
 
     return (
       <div className="color">
@@ -55,7 +63,11 @@ export default class extends React.Component {
               return (
                 <div
                   key={set}
-                  className={cls(set, set === currentColor ? "active" : null)}
+                  className={cls(
+                    set,
+                    set === currentColor ? "active" : null,
+                    showAnimate ? "animate" : null
+                  )}
                   style={{
                     backgroundColor: switchColor[set],
                     animationDelay: index * 3000,
