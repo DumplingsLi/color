@@ -1,6 +1,7 @@
 import React from "react";
 import Circle from "./components/Circle/index";
 import Title from "./components/Title/index";
+import Card from './components/Card/index'
 import data from "./data/data.json";
 import cls from "classnames";
 
@@ -16,18 +17,9 @@ export default class extends React.Component {
     return {
       currentColor: "red",
       currentList: data[0].list,
-      switchColor,
-      showAnimate: true,
+      switchColor
     };
   }
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({
-        showAnimate: false,
-      });
-    }, 1000);
-  }
-
   renderList() {
     const { currentList, switchColor, currentColor } = this.state;
 
@@ -50,35 +42,32 @@ export default class extends React.Component {
     });
   }
 
-  render() {
-    const { currentColor, switchColor, showAnimate } = this.state;
+  renderCard() {
+    const { currentColor, switchColor } = this.state;
 
+    return data.map(({ set, list }, index) => {  
+      return (
+        <Card 
+          key={set}
+          set={set}
+          index={index}
+          currentColor={currentColor}
+          style={{backgroundColor: switchColor[set]}}
+          onClick={() =>
+            this.setState({ currentList: list, currentColor: set })
+          }
+        />
+      );
+    })
+  }
+
+  render() {
     return (
       <div className="color">
         <div className="color-table">{this.renderList()}</div>
         <div className="color-drawer">
           <Title />
-          <div className="color-drawer__card">
-            {data.map(({ set, list }, index) => {
-              return (
-                <div
-                  key={set}
-                  className={cls(
-                    set,
-                    set === currentColor ? "active" : null,
-                    showAnimate ? "animate" : null
-                  )}
-                  style={{
-                    backgroundColor: switchColor[set],
-                    animationDelay: index * 3000,
-                  }}
-                  onClick={() =>
-                    this.setState({ currentList: list, currentColor: set })
-                  }
-                ></div>
-              );
-            })}
-          </div>
+          <div className="color-drawer__card">{this.renderCard()}</div>
         </div>
       </div>
     );

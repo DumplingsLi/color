@@ -1,23 +1,23 @@
 import React from "react";
 import cls from "classnames";
 import Clipboard from "clipboard";
+import Transition from '../Transition'
 import "./style.less";
 
 export default class Circle extends React.Component {
-  state = {
-    show: false,
-    descStyle: {},
-    copy: false,
-  };
+  state = this.getInitialState();
+
+  getInitialState() {
+    return {
+      descStyle: {},
+      copy: false,
+    };
+  }
+
   componentDidMount() {
-    const { index } = this.props;
-    setTimeout(() => {
-      this.setState({
-        show: true,
-      });
-    }, index * 8);
     new Clipboard(this.dom);
   }
+
   onMouseMove = (e) => {
     const { left, top } = this.dom.getBoundingClientRect();
     this.setState({
@@ -28,6 +28,7 @@ export default class Circle extends React.Component {
       },
     });
   };
+
   onMouseLeave = () => {
     this.setState({
       descStyle: {
@@ -36,11 +37,13 @@ export default class Circle extends React.Component {
       copy: false,
     });
   };
+
   onMouseDown = () => {
     this.setState({
       copy: true,
     });
   };
+  
   renderDesc() {
     const { name, color } = this.props;
     const { copy } = this.state;
@@ -58,29 +61,30 @@ export default class Circle extends React.Component {
   }
   getDOM = (el) => (this.dom = el);
   render() {
-    const { color, onClick } = this.props;
+    const { color, onClick, index } = this.props;
     const { show, descStyle, copy } = this.state;
     return (
-      <div
-        ref={this.getDOM}
-        className="grid-item"
-        style={show ? { display: "block" } : null}
-        onMouseMove={this.onMouseMove}
-        onMouseLeave={this.onMouseLeave}
-        onMouseDown={this.onMouseDown}
-        onMouseUp={this.onMouseUp}
-        onClick={onClick}
-        data-clipboard-text={color}
-      >
-        <div className="circle">
-          <svg>
-            <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
-          </svg>
+      <Transition num={index*8}>
+        <div
+          ref={this.getDOM}
+          className="grid-item"
+          onMouseMove={this.onMouseMove}
+          onMouseLeave={this.onMouseLeave}
+          onMouseDown={this.onMouseDown}
+          onMouseUp={this.onMouseUp}
+          onClick={onClick}
+          data-clipboard-text={color}
+        >
+          <div className="circle">
+            <svg>
+              <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
+            </svg>
+          </div>
+          <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
+            {this.renderDesc()}
+          </div>
         </div>
-        <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
-          {this.renderDesc()}
-        </div>
-      </div>
+      </Transition>
     );
   }
 }

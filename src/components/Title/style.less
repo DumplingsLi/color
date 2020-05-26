@@ -2,6 +2,18 @@
   padding-top: 70px;
   font-size: 120px;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .before-enter {
+    display: block;
+    visibility: hidden;
+  }
+
+  .enter {
+    visibility: visible;
+  }
 
   svg {
     margin-right: 20px;
@@ -10,11 +22,8 @@
     line-height: 120px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    animation: show 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    animation: show .8s cubic-bezier(0.23, 1, 0.32, 1);
 
-    &:last-child {
-      margin-right: 0;
-    }
     &:hover {
       transform: rotateY(180deg);
     }
@@ -26,7 +35,19 @@
     transform: scale(0);
   }
   50% {
-    transform: scale(2);
+    transform: scale(3);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes show {
+  0 {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(3);
   }
   100% {
     transform: scale(1);
