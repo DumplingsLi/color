@@ -1,0 +1,94 @@
+.card {
+  position: absolute;
+  top: 155px;
+  width: 120px;
+  height: 120px;
+  transform: rotate(45deg);
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+
+  &.enter-active {
+    animation: up 0.5s ease-in-out;
+  }
+  
+  &:hover {
+    top: 142px;
+    width: 150px;
+    height: 150px;
+  }
+
+  &.active {
+    top: 142px;
+    width: 150px;
+    height: 150px;
+   
+    &.enter-active {
+      animation: activeUp 0.5s ease-in-out;
+    }
+  }
+
+  &:nth-child(2) {
+    left: var(--dis);
+  }
+
+  &:nth-child(3) {
+    left: calc(var(--dis) * 2);
+  }
+
+  &:nth-child(4) {
+    left: calc(var(--dis) * 3);
+  }
+
+  &:nth-child(5) {
+    left: calc(var(--dis) * 4);
+  }
+
+  &:nth-child(6) {
+    left: calc(var(--dis) * 5);
+  }
+
+  &:nth-child(7) {
+    left: calc(var(--dis) * 6);
+  }
+
+  &:nth-child(8) {
+    left: calc(var(--dis) * 7);
+  }
+}
+
+@keyframes up {
+  from {
+    top: 205px;
+  }
+  to {
+    top: 155px;
+  }
+}
+
+@keyframes activeUp {
+  from {
+    top: 205px;
+  }
+  to {
+    top: 142px;
+  }
+}
+
+@-webkit-keyframes up {
+  from {
+    top: 205px;
+  }
+  to {
+    top: 155px;
+  }
+}
+
+@-webkit-keyframes activeUp {
+  from {
+    top: 260px;
+  }
+  to {
+    top: 142px;
+  }
+}
