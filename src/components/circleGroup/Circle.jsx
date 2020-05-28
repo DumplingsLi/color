@@ -5,15 +5,14 @@ import Transition from '../Transition'
 import "./style.less";
 
 export default class Circle extends React.Component {
-  state = this.getInitialState();
-
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props)
+    this.state = {
       descStyle: {},
-      copy: false,
-    };
+      copy: false
+    }
   }
-
+  
   componentDidMount() {
     new Clipboard(this.dom);
   }
@@ -43,7 +42,7 @@ export default class Circle extends React.Component {
       copy: true,
     });
   };
-  
+
   renderDesc() {
     const { name, color } = this.props;
     const { copy } = this.state;

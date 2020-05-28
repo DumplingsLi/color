@@ -1,73 +1,62 @@
 import React from "react";
-import Circle from "./components/Circle/index";
+import CircleGroup from "./components/circleGroup/index";
 import Title from "./components/Title/index";
-import Card from './components/Card/index'
+import CardGroup from './components/cardGroup/index'
 import data from "./data/data.json";
+import { category, cardColor } from './data/category'
 import cls from "classnames";
 
 export default class extends React.Component {
-  state = this.getInitialState();
-
-  getInitialState() {
-    const switchColor = {};
-    data.forEach(({ set, list }) => {
-      switchColor[set] = list[0].value;
-    });
-
-    return {
-      currentColor: "red",
-      currentList: data[0].list,
-      switchColor
-    };
+  constructor(props) {
+    super(props)
+    this.state = {
+      cardColor,
+      currentIndex: 0
+    }
   }
-  renderList() {
-    const { currentList, switchColor, currentColor } = this.state;
-
-    return currentList.map(({ name, value }, index) => {
-      return (
-        <Circle
-          key={name}
-          name={name}
-          color={value}
-          index={index}
-          onClick={() => {
-            let curCol = switchColor;
-            curCol[currentColor] = value;
-            this.setState({
-              switchColor: curCol,
-            });
-          }}
-        />
-      );
-    });
+ 
+  getColorList() {
+    const { currentIndex } = this.state
+    return data[currentIndex].list
   }
 
-  renderCard() {
-    const { currentColor, switchColor } = this.state;
+  toggleChangeCircle(color) {
+    const { cardColor, currentIndex } = this.state
+    const arrTemp = cardColor
+    arrTemp[currentIndex] = color
+    this.setState({
+      cardColor: arrTemp
+    })
+  }
 
-    return data.map(({ set, list }, index) => {  
-      return (
-        <Card 
-          key={set}
-          set={set}
-          index={index}
-          currentColor={currentColor}
-          style={{backgroundColor: switchColor[set]}}
-          onClick={() =>
-            this.setState({ currentList: list, currentColor: set })
-          }
-        />
-      );
+  toggleChangeCard(index) {
+    this.setState({
+      currentIndex: index
     })
   }
 
   render() {
+    const { currentIndex, cardColor } = this.state
+    
     return (
       <div className="color">
-        <div className="color-table">{this.renderList()}</div>
+        <div className="color-table">
+          <CircleGroup 
+            cardColor={cardColor} 
+            list={this.getColorList()} 
+            onChange={this.toggleChangeCircle.bind(this)}
+          />
+        </div>
         <div className="color-drawer">
           <Title />
-          <div className="color-drawer__card">{this.renderCard()}</div>
+          <div className="color-drawer__card">
+            <CardGroup 
+              cardColor={cardColor} 
+              category={category} 
+              currentIndex={currentIndex} 
+              onChange={this.toggleChangeCard.bind(this)}
+            />
+          </div>
         </div>
       </div>
     );

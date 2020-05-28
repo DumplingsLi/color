@@ -5,6 +5,7 @@ import L from './L'
 import R from './R'
 import Transition from '../Transition'
 import "./style.less";
+
 const textColor = [
   {fill: "#ffb93f"},
   {fill: "#ac568a"},
@@ -17,7 +18,7 @@ export default function Title() {
   return (
     <div className="title">
       {textColor.map((c, index)=> {
-        return <Transition num={index*80}><Comp index={index} /></Transition>
+        return <Transition num={index*80} key={`${c}${index}`}><Comp index={index} /></Transition>
       })}
     </div> 
   );
