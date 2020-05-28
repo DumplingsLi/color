@@ -4,6 +4,7 @@ import O from './O'
 import L from './L'
 import R from './R'
 import Transition from '../Transition'
+import cls from 'classnames'
 import "./style.less";
 
 const textColor = [
@@ -18,13 +19,15 @@ export default function Title() {
   return (
     <div className="title">
       {textColor.map((c, index)=> {
-        return <Transition num={index*80} key={`${c}${index}`}><Comp index={index} /></Transition>
+        return <Transition num={index*80} key={`${c}${index}`}>{str => (
+          <div className={cls(`char ${str}`)}><Char index={index} /></div>
+        )}</Transition>
       })}
     </div> 
   );
 }
 
-function Comp({index}) {
+function Char({index}) {
   switch (index) {
     case 0:
       return (<C fill={textColor[index]} />)

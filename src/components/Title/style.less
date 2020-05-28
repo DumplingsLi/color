@@ -6,23 +6,19 @@
   justify-content: center;
   align-items: center;
 
-  .before-enter {
-    display: block;
-    visibility: hidden;
-  }
-
-  .enter {
-    visibility: visible;
-  }
-
-  svg {
+  .char {
     margin-right: 20px;
+
+    &.enter-active svg {
+      animation: show .8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+  }
+ 
+  svg {
     width: 70px;
     height: 70px;
-    line-height: 120px;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    animation: show .8s cubic-bezier(0.23, 1, 0.32, 1);
 
     &:hover {
       transform: rotateY(180deg);

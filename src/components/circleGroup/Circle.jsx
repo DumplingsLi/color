@@ -12,7 +12,7 @@ export default class Circle extends React.Component {
       copy: false
     }
   }
-  
+
   componentDidMount() {
     new Clipboard(this.dom);
   }
@@ -64,25 +64,27 @@ export default class Circle extends React.Component {
     const { show, descStyle, copy } = this.state;
     return (
       <Transition num={index*8}>
-        <div
-          ref={this.getDOM}
-          className="grid-item"
-          onMouseMove={this.onMouseMove}
-          onMouseLeave={this.onMouseLeave}
-          onMouseDown={this.onMouseDown}
-          onMouseUp={this.onMouseUp}
-          onClick={onClick}
-          data-clipboard-text={color}
-        >
-          <div className="circle">
-            <svg>
-              <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
-            </svg>
+        {str => (
+          <div
+            ref={this.getDOM}
+            className={`grid-item ${str}`}
+            onMouseMove={this.onMouseMove}
+            onMouseLeave={this.onMouseLeave}
+            onMouseDown={this.onMouseDown}
+            onMouseUp={this.onMouseUp}
+            onClick={onClick}
+            data-clipboard-text={color}
+          >
+            <div className="circle">
+              <svg>
+                <circle r="50%" cy="50%" cx="50%" style={{ fill: color }} />
+              </svg>
+            </div>
+            <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
+              {this.renderDesc()}
+            </div>
           </div>
-          <div className={cls("desc", copy ? "copy" : null)} style={descStyle}>
-            {this.renderDesc()}
-          </div>
-        </div>
+        )}
       </Transition>
     );
   }
