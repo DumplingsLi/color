@@ -1,8 +1,8 @@
 import React from 'react'
 import Card from './Card'
 
-export default function CardGroup({category, cardColor, currentIndex, onChange}) {
-  return category.map((val, index) => {  
+export default function CardGroup({cardColor, currentIndex, onChange}) {
+  return cardColor.map((val, index) => {  
     return (
       <Card
         key={val}

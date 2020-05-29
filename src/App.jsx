@@ -3,12 +3,13 @@ import CircleGroup from "./components/circleGroup/index";
 import Title from "./components/Title/index";
 import CardGroup from './components/cardGroup/index'
 import data from "./data/data.json";
-import { category, cardColor } from './data/category'
 import cls from "classnames";
 
 export default class extends React.Component {
   constructor(props) {
     super(props)
+    const cardColor = data.map(({ list }) => list[0].value);
+    
     this.state = {
       cardColor,
       currentIndex: 0
@@ -42,7 +43,6 @@ export default class extends React.Component {
       <div className="color">
         <div className="color-table">
           <CircleGroup 
-            cardColor={cardColor} 
             list={this.getColorList()} 
             onChange={this.toggleChangeCircle.bind(this)}
           />
@@ -52,7 +52,6 @@ export default class extends React.Component {
           <div className="color-drawer__card">
             <CardGroup 
               cardColor={cardColor} 
-              category={category} 
               currentIndex={currentIndex} 
               onChange={this.toggleChangeCard.bind(this)}
             />
