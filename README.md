@@ -1,2 +1,2 @@
 ## color
-![image](intro.png)
+![image](intro.gif)
